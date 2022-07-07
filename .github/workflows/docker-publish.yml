@@ -15,9 +15,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: azure/docker-login@v1
         with:
-           login-server: knowledgefactorydev.azurecr.io
-           username: KnowledgefactoryDev
-           password: /4jxuxihtIRjERWAme2KQEywFLtECz=7
+           login-server: .azurecr.io
+           username: 
+           password: /=7
       - run: |
-          docker build . -t knowledgefactorydev.azurecr.io/knowledgefactory:${{ github.sha }}
-          docker push knowledgefactorydev.azurecr.io/knowledgefactory:${{ github.sha }}
+          docker build . -t .azurecr.io/knowledgefactory:${{ github.sha }}
+          docker push .azurecr.io/knowledgefactory:${{ github.sha }}
