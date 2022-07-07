@@ -1,5 +1,5 @@
 
-FROM maven:3.8.0 AS maven
+FROM maven:3.6-jdk-11 as maven_build
 WORKDIR /app
 
 COPY pom.xml .
