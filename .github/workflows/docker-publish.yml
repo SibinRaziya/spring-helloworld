@@ -14,12 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - uses: azure/docker-login@v1
-        with:
-          login-server: knowledgefactorydev.azurecr.io
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-
       - run: |
           docker build . -t knowledgefactorydev.azurecr.io/appdb:${{ github.sha }}
           docker push knowledgefactorydev.azurecr.io/appdb:${{ github.sha }}
