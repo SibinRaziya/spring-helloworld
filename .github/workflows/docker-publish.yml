@@ -3,7 +3,7 @@ name: Docker
 on:
   push:
     branches:
-      - master
+      - auto-build
 
 env:
   IMAGE_NAME: departments-api
