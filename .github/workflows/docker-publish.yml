@@ -19,5 +19,5 @@ jobs:
            username: KnowledgefactoryDev
            password: /4jxuxihtIRjERWAme2KQEywFLtECz=7
       - run: |
-          docker build . -t knowledgefactorydev.azurecr.io/image1:latest
-          docker push knowledgefactorydev.azurecr.io/image1:latest
+          docker build . -t knowledgefactorydev.azurecr.io/knowledgefactory:${{ github.sha }}
+          docker push knowledgefactorydev.azurecr.io/knowledgefactory:${{ github.sha }}
