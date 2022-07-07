@@ -1,19 +1,27 @@
+#
+# Build stage
+#
 
-FROM maven:3.6-jdk-11 as maven_build
-WORKDIR /app
+FROM maven:3.6.3-jdk-11-slim AS build
 
-COPY pom.xml .
-# To resolve dependencies in a safe way (no re-download when the source code changes)
-RUN mvn package
+WORKDIR usr/src/app
 
-# To package the application
-COPY src ./src
-RUN mvn clean package -Dmaven.test.skip
+COPY . ./
 
+RUN mvn clean package
 
-# For Java 11, try this
-FROM adoptopenjdk/openjdk11:alpine-jre
+#
+# Package stage
+#
 
-COPY --from=build /home/app/target/spring-boot-web.jar /usr/local/lib/demo.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]
+FROM openjdk:11-jre-slim
+
+ARG JAR_NAME="spring-boot-web"
+
+WORKDIR /usr/src/app
+
+EXPOSE ${HTTP_PORT}
+
+COPY --from=build /usr/src/app/target/${JAR_NAME}.jar ./app.jar
+
+CMD ["java","-jar", "./app.jar"]
