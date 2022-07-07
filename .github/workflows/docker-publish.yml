@@ -13,7 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+      - uses: azure/docker-login@v1
+        with:
+           login-server: knowledgefactorydev.azurecr.io
+           username: KnowledgefactoryDev
+           password: /4jxuxihtIRjERWAme2KQEywFLtECz=7
       - run: |
-          docker build . -t knowledgefactorydev.azurecr.io/appdb:${{ github.sha }}
-          docker push knowledgefactorydev.azurecr.io/appdb:${{ github.sha }}
+          docker build . -t knowledgefactorydev.azurecr.io/image:latest
+          docker push knowledgefactorydev.azurecr.io/image:latest
